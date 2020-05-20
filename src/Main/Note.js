@@ -1,12 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
+import UserContext from '../ContextProvider';
 
 
 export default function Note(props) {
     return(
+        <UserContext.Consumer>
+        {({folders, notes}) => (
         <section>
-            {props.notes.map(note => 
+            {notes.map(note => 
             <div className='noteItem' key={note.id} >
             <NavLink className='navlink note-name' to={'/note/' + note.id}>{note.name}</NavLink>
             <p className='date'>{`Date modified on ${moment(note.modified).format('MMM D YYYY')}`}</p>
@@ -18,5 +21,7 @@ export default function Note(props) {
             <button className="Add-note">Add Note</button>
 
         </section>
+          )}   
+        </UserContext.Consumer>
     )
 }
