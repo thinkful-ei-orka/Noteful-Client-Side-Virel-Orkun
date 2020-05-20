@@ -47,66 +47,10 @@ class App extends React.Component {
     ],
   };
 
-  // //Sidebar Context
+  fetchAPI = (endpoint) => {
+      return fetch()
+    }
 
-  // renderSidebar() {
-  //   return (
-  //       <div className="sidebar-router">
-  //         <Route path="/" exact component={Sidebar} />
-
-  //         <Route path="/folder/:folderId" component={Sidebar} />
-
-  //         <Route
-  //           path="/note/:noteId"
-  //           render={(routerProps) => {
-  //             console.log(routerProps);
-  //             let note = this.state.notes.find(
-  //               (note) => note.id === routerProps.match.params.noteId
-  //             );
-  //             let folder = this.state.folders.find(
-  //               (folder) => folder.id === note.folderId
-  //             );
-  //             return <GoBack folderName={folder.name} />;
-  //           }}
-  //         />
-  //       </div>
-  //   );
-  // }
-
-  // //Main render
-  // renderMain() {
-  //   return (
-  //     <div className="main-router">
-  //       <Route path="/" component={Main} />
-
-  //       <Route
-  //         path="/folder/:folderId"
-  //         render={(routerProps) => {
-  //           console.log(routerProps.match.params.folderId);
-  //           return (
-  //             <Main
-  //               notes={this.state.notes.filter(
-  //                 (note) => note.folderId === routerProps.match.params.folderId
-  //               )}
-  //             />
-  //           );
-  //         }}
-  //       />
-
-  //       <Route
-  //         path="/note/:noteId"
-  //         render={(routerProps) => (
-  //           <Main
-  //             showDescription={true}
-  //             notes={this.state.notes.filter(
-  //               (note) => note.id === routerProps.match.params.noteId
-  //             )}
-  //           />
-  //         )}
-  //       />
-  //     </div>
-  //   );
-  // }
 
   render() {
     return (
@@ -139,7 +83,7 @@ class App extends React.Component {
           </div>
           
           <div className="main-router">
-        <Route path="/" component={Main} />
+        <Route path="/" exact component={Main} />
 
         <Route
           path="/folder/:folderId"
@@ -147,9 +91,7 @@ class App extends React.Component {
             console.log(routerProps.match.params.folderId);
             return (
               <Main
-                notes={this.state.notes.filter(
-                  (note) => note.folderId === routerProps.match.params.folderId
-                )}
+                folderId={routerProps.match.params.folderId}
               />
             );
           }}
@@ -211,3 +153,70 @@ export default App;
 //   </div>
 
 // </main>
+
+
+
+
+
+
+
+  // //Sidebar Context
+
+  // renderSidebar() {
+  //   return (
+  //       <div className="sidebar-router">
+  //         <Route path="/" exact component={Sidebar} />
+
+  //         <Route path="/folder/:folderId" component={Sidebar} />
+
+  //         <Route
+  //           path="/note/:noteId"
+  //           render={(routerProps) => {
+  //             console.log(routerProps);
+  //             let note = this.state.notes.find(
+  //               (note) => note.id === routerProps.match.params.noteId
+  //             );
+  //             let folder = this.state.folders.find(
+  //               (folder) => folder.id === note.folderId
+  //             );
+  //             return <GoBack folderName={folder.name} />;
+  //           }}
+  //         />
+  //       </div>
+  //   );
+  // }
+
+  // //Main render
+  // renderMain() {
+  //   return (
+  //     <div className="main-router">
+  //       <Route path="/" component={Main} />
+
+  //       <Route
+  //         path="/folder/:folderId"
+  //         render={(routerProps) => {
+  //           console.log(routerProps.match.params.folderId);
+  //           return (
+  //             <Main
+  //               notes={this.state.notes.filter(
+  //                 (note) => note.folderId === routerProps.match.params.folderId
+  //               )}
+  //             />
+  //           );
+  //         }}
+  //       />
+
+  //       <Route
+  //         path="/note/:noteId"
+  //         render={(routerProps) => (
+  //           <Main
+  //             showDescription={true}
+  //             notes={this.state.notes.filter(
+  //               (note) => note.id === routerProps.match.params.noteId
+  //             )}
+  //           />
+  //         )}
+  //       />
+  //     </div>
+  //   );
+  // }

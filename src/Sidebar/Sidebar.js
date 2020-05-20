@@ -4,9 +4,8 @@ import FolderList from './FolderList';
 export default function Sidebar(props) {
     return(
         <section className="sidebar">
-            <FolderList folders={props.folders}/>
+            <FolderList />
             <button className='Add-folder'>Add Folder</button>
-    
         </section>
     )
 }

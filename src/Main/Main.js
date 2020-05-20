@@ -6,13 +6,16 @@ import UserContext from '../ContextProvider';
 
 
 export default function MainRoute(props) {
+    console.log(props)
     return(
         
         <section className="main">
-            <Note/>    
+            <Note showDescription={props.showDescription}
+            folderId={props.folderId}
+            />    
         </section> 
       
     )
 }
 
-// showDescription={props.showDescription}
+// 
