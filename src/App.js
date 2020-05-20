@@ -45,50 +45,129 @@ class App extends React.Component {
       }, 
     ]
   }
-  
 
+
+//Sidebar Context
+
+  renderSidebar() {
+    return(
+    
+
+      <UserContext.Provider value={{
+        folders: this.state.folders,
+        notes: this.state.notes
+      }}>
+    
+      <Route path ='/' exact component={Sidebar} />
+  
+      <Route path ='/folder/:folderId' component={Sidebar} />
+  
+      <Route path ='/note/:noteId' render={(routerProps) => {
+      console.log(routerProps)
+      let note = this.state.notes.find(note => note.id ===  routerProps.match.params.noteId)
+      let folder = this.state.folders.find(folder => folder.id === note.folderId)
+      return <GoBack folderName={folder.name}/>
+      }}/>
+       </UserContext.Provider>
+      )
+  }
+ 
+
+  
+  //Main render
+  renderMain() {
+    return(
+      <UserContext.Provider value={{
+        folders: this.state.folders,
+        notes: this.state.notes
+      }}>
+      Route path='/' component={Main}/>
+
+    <Route path='/folder/:folderId' render={(routerProps) =>{
+      console.log(routerProps.match.params.folderId)
+      return <Main notes={this.state.notes.filter(note=> note.folderId === routerProps.match.params.folderId)}/>
+    }}/>
+
+    <Route path='/note/:noteId' render={(routerProps) => 
+    <Main showDescription={true} notes={this.state.notes.filter(note => note.id ===  routerProps.match.params.noteId)}/>
+    }/>
+    </UserContext.Provider>
+    )
+  }
+ 
 
   render(){
-  return (
-    <main className='App'>
-      <Header/>
-      <div className="sidebar-router">
-        <Route path ='/' exact render={(routerProps) =>
-        <Sidebar folders={this.state.folders} />
-        }/>
+  return(
+    
+  <main className='App'>
+   <div className="sidebar-router">
+    {this.renderSidebar}
+  </div>
+  
+  
+  <div className="main-router">
+    {this.renderMain}
+  </div>
+  </main>
 
-        <Route path ='/folder/:folderId' render={(routerProps) =>
-        <Sidebar folders={this.state.folders} />
-        }/>
-
-        <Route path ='/note/:noteId' render={(routerProps) => {
-        console.log(routerProps)
-        let note = this.state.notes.find(note => note.id ===  routerProps.match.params.noteId)
-        let folder = this.state.folders.find(folder => folder.id === note.folderId)
-        return <GoBack folderName={folder.name}/>
-        }}/>
-      </div>
-      
-      
-      <div className="main-router">
-        <Route path='/' exact render={(routerProps) =>
-        <Main notes={this.state.notes}/>
-        }/>
-
-        <Route path='/folder/:folderId' render={(routerProps) =>{
-          console.log(routerProps.match.params.folderId)
-          return <Main notes={this.state.notes.filter(note=> note.folderId === routerProps.match.params.folderId)}/>
-        }}/>
-
-        <Route path='/note/:noteId' render={(routerProps) => 
-        <Main showDescription={true} notes={this.state.notes.filter(note => note.id ===  routerProps.match.params.noteId)}/>
-        }/>
-        
-      </div>
-
-    </main>
+ 
   );
 }
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  // return (
+    // 
+    //   <Header/>
+    //   <div className="sidebar-router">
+    //     <Route path ='/' exact render={(routerProps) =>
+    //     <Sidebar folders={this.state.folders} />
+    //     }/>
+
+    //     <Route path ='/folder/:folderId' component={Sidebar} />
+    //     }/>
+
+    //     <Route path ='/note/:noteId' render={(routerProps) => {
+    //     console.log(routerProps)
+    //     let note = this.state.notes.find(note => note.id ===  routerProps.match.params.noteId)
+    //     let folder = this.state.folders.find(folder => folder.id === note.folderId)
+    //     return <GoBack folderName={folder.name}/>
+    //     }}/>
+    //   </div>
+      
+      
+    //   <div className="main-router">
+    //     <Route path='/' exact render={(routerProps) =>
+    //     <Main notes={this.state.notes}/>
+    //     }/>
+
+    //     <Route path='/folder/:folderId' render={(routerProps) =>{
+    //       console.log(routerProps.match.params.folderId)
+    //       return <Main notes={this.state.notes.filter(note=> note.folderId === routerProps.match.params.folderId)}/>
+    //     }}/>
+
+    //     <Route path='/note/:noteId' render={(routerProps) => 
+    //     <Main showDescription={true} notes={this.state.notes.filter(note => note.id ===  routerProps.match.params.noteId)}/>
+    //     }/>
+        
+    //   </div>
+
+    // </main>
