@@ -5,54 +5,50 @@ import { Route } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import GoBack from "./Sidebar/GoBack";
 import UserContext from "./ContextProvider";
+import NoteList from './Main/NoteList'
 
 class App extends React.Component {
+  
   state = {
-    folders: [
-      {
-        id: "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
-        name: "Important",
-      },
-      {
-        id: "b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1",
-        name: "Super",
-      },
-      {
-        id: "b07162f0-ffaf-11e8-8eb2-f2801f1b9fd1",
-        name: "Spangley",
-      },
-    ],
-    notes: [
-      {
-        id: "cbc787a0-ffaf-11e8-8eb2-f2801f1b9fd1",
-        name: "Dogs",
-        modified: "2019-01-03T00:00:00.000Z",
-        folderId: "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
-        content: "Corporis accusamus placeat quas non voluptas.",
-      },
-      {
-        id: "d26e0034-ffaf-11e8-8eb2-f2801f1b9fd1",
-        name: "Cats",
-        modified: "2018-08-15T23:00:00.000Z",
-        folderId: "b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1",
-        content: "Eos laudantium quia ab blanditiis temporibus necessitatibus.",
-      },
-      {
-        id: "d26e01a6-ffaf-11e8-8eb2-f2801f1b9fd1",
-        name: "Pigs",
-        modified: "2018-03-01T00:00:00.000Z",
-        folderId: "b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1",
-        content: "Occaecati dignissimos quam qui facere deserunt quia.",
-      },
-    ],
+    folders: [],
+    notes: [],
   };
 
   fetchAPI = (endpoint) => {
-      return fetch()
-    }
+    return fetch(`http://localhost:9090/${endpoint}`)
+      .then((res) => {
+        if (res.ok) {
+                return res.json()
+              }
+      })
+      .then((data) => {
+        return data
+      })
+      
+  }
+
+  componentDidMount() {
+    this.fetchAPI('notes')
+      .then((res) => {
+        this.setState({
+          notes: res
+      })
+      })
+    
+    this.fetchAPI('folders')
+      .then((res) => {
+        this.setState({
+          folders: res
+      })
+    })
+  }
 
 
   render() {
+    console.log(this.state)
+    if (this.state.notes.length === 0 || this.state.folders.length === 0) {
+    return <p>Loading...</p>
+    }
     return (
       <UserContext.Provider
         value={{
@@ -95,19 +91,21 @@ class App extends React.Component {
               />
             );
           }}
-        />
-
-        <Route
-          path="/note/:noteId"
-          render={(routerProps) => (
-            <Main
-              showDescription={true}
-              notes={this.state.notes.filter(
-                (note) => note.id === routerProps.match.params.noteId
-              )}
             />
-          )}
-        />
+        <Route
+         path="/note/:noteId"
+         render={(routerProps) => (
+           <NoteList
+                 showDescription={true}
+                 note={this.state.notes.filter(
+                     (note) => note.id === routerProps.match.params.noteId
+                 )}
+           />
+         )}
+       />  
+            
+
+       
       </div>
         </main>
       </UserContext.Provider>
