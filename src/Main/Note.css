@@ -1,0 +1,24 @@
+.noteItem {
+    margin-bottom: 10px;
+}
+
+.note-name {
+    font-size: 25px;
+  }
+  
+
+  .noteItem {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid black;
+    width: 65%;
+    margin-left: 30%;
+    height: fit-content;
+  }
+
+  
+.delete-note{
+    margin-left: 80%;
+    height: 40px;
+    width: 20%;
+  }

@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import UserContext from '../ContextProvider';
+import './Note.css';
 
 
 export default function Note(props) {
