@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-// import Note from '../Main/Note';
 import UserContext from '../ContextProvider';
 
 export default function FolderList(props) {

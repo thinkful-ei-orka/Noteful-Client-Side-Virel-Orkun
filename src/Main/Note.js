@@ -6,10 +6,10 @@ import UserContext from '../ContextProvider';
 
 export default function Note(props) {
     console.log(props)
-    const {id, name, modified, content} = props.note
+    
     return (
         <UserContext.Consumer>
-        {({folders, notes}) => (
+        {({deleteNote}) => (
         <section>
                 {props.note.filter(
                     (note) => {
@@ -22,14 +22,19 @@ export default function Note(props) {
             <div className='noteItem' key={note.id} >
                     <NavLink className='navlink note-name' to={'/note/' + note.id}>{note.name}</NavLink>
             <p className='date'>{`Date modified on ${moment(note.modified).format('MMM D YYYY')}`}</p>
-            <button className='delete-note'>Delete Note</button>
+                         <button onClick={() => {
+                             props.location.pathname = '/'
+                             deleteNote(note.id)
+            }} 
+            
+            className='delete-note'>Delete Note</button>
             {props.showDescription ? (<p>{note.content}</p>): ''}
             </div>
             
             )}
 
         </section>
-          )}   
-        </UserContext.Consumer>
+    )}   
+         </UserContext.Consumer>
     )
 }

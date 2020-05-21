@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./Header";
-import Main from "./Main/Main";
 import { Route } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import GoBack from "./Sidebar/GoBack";
@@ -28,6 +27,25 @@ class App extends React.Component {
       
   }
 
+  deleteNote = (noteId) => {
+    return fetch(`http://localhost:9090/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    }).then(() => {
+      const notes = this.state.notes.filter((note) => {
+        return note.id !== noteId;
+      });
+      this.setState({
+        notes: notes,
+      })
+    })
+      
+  } 
+
+
+
   componentDidMount() {
     this.fetchAPI('notes')
       .then((res) => {
@@ -45,6 +63,8 @@ class App extends React.Component {
   }
 
 
+
+
   render() {
     console.log(this.state)
     if (this.state.notes.length === 0 || this.state.folders.length === 0) {
@@ -55,6 +75,7 @@ class App extends React.Component {
         value={{
           folders: this.state.folders,
           notes: this.state.notes,
+          deleteNote : this.deleteNote
         }}
       >
          <Header/>
@@ -88,6 +109,7 @@ class App extends React.Component {
             console.log(routerProps.match.params.folderId);
             return (
               <NoteList
+                location = {routerProps.location}
                 showDescription={false}
                 folderId={routerProps.match.params.folderId}
               />
@@ -98,6 +120,7 @@ class App extends React.Component {
          path="/note/:noteId"
          render={(routerProps) => (
            <Note
+                 location = {routerProps.location}
                  showDescription={true}
                  note={this.state.notes.filter(
                      (note) => note.id === routerProps.match.params.noteId
@@ -105,9 +128,6 @@ class App extends React.Component {
            />
          )}
        />  
-            
-
-       
       </div>
         </main>
       </UserContext.Provider>
@@ -117,106 +137,3 @@ class App extends React.Component {
 
 export default App;
 
-// return (
-//
-//  
-//   <div className="sidebar-router">
-//     <Route path ='/' exact render={(routerProps) =>
-//     <Sidebar folders={this.state.folders} />
-//     }/>
-
-//     <Route path ='/folder/:folderId' component={Sidebar} />
-//     }/>
-
-//     <Route path ='/note/:noteId' render={(routerProps) => {
-//     console.log(routerProps)
-//     let note = this.state.notes.find(note => note.id ===  routerProps.match.params.noteId)
-//     let folder = this.state.folders.find(folder => folder.id === note.folderId)
-//     return <GoBack folderName={folder.name}/>
-//     }}/>
-//   </div>
-
-//   <div className="main-router">
-//     <Route path='/' exact render={(routerProps) =>
-//     <Main notes={this.state.notes}/>
-//     }/>
-
-//     <Route path='/folder/:folderId' render={(routerProps) =>{
-//       console.log(routerProps.match.params.folderId)
-//       return <Main notes={this.state.notes.filter(note=> note.folderId === routerProps.match.params.folderId)}/>
-//     }}/>
-
-//     <Route path='/note/:noteId' render={(routerProps) =>
-//     <Main showDescription={true} notes={this.state.notes.filter(note => note.id ===  routerProps.match.params.noteId)}/>
-//     }/>
-
-//   </div>
-
-// </main>
-
-
-
-
-
-
-
-  // //Sidebar Context
-
-  // renderSidebar() {
-  //   return (
-  //       <div className="sidebar-router">
-  //         <Route path="/" exact component={Sidebar} />
-
-  //         <Route path="/folder/:folderId" component={Sidebar} />
-
-  //         <Route
-  //           path="/note/:noteId"
-  //           render={(routerProps) => {
-  //             console.log(routerProps);
-  //             let note = this.state.notes.find(
-  //               (note) => note.id === routerProps.match.params.noteId
-  //             );
-  //             let folder = this.state.folders.find(
-  //               (folder) => folder.id === note.folderId
-  //             );
-  //             return <GoBack folderName={folder.name} />;
-  //           }}
-  //         />
-  //       </div>
-  //   );
-  // }
-
-  // //Main render
-  // renderMain() {
-  //   return (
-  //     <div className="main-router">
-  //       <Route path="/" component={Main} />
-
-  //       <Route
-  //         path="/folder/:folderId"
-  //         render={(routerProps) => {
-  //           console.log(routerProps.match.params.folderId);
-  //           return (
-  //             <Main
-  //               notes={this.state.notes.filter(
-  //                 (note) => note.folderId === routerProps.match.params.folderId
-  //               )}
-  //             />
-  //           );
-  //         }}
-  //       />
-
-  //       <Route
-  //         path="/note/:noteId"
-  //         render={(routerProps) => (
-  //           <Main
-  //             showDescription={true}
-  //             notes={this.state.notes.filter(
-  //               (note) => note.id === routerProps.match.params.noteId
-  //             )}
-  //           />
-  //         )}
-  //       />
-  //     </div>
-  //   );
-  // }
