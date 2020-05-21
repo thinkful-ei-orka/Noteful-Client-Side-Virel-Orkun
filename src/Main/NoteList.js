@@ -31,7 +31,9 @@ export default function Note(props) {
             </div>
             
             )}
+            <NavLink to="/add-note">
             <button className="Add-note">Add Note</button>
+            </NavLink>
 
         </section>
           )}   

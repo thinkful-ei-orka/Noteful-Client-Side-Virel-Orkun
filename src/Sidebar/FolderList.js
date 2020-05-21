@@ -7,7 +7,7 @@ export default function FolderList(props) {
 
     return(
         <UserContext.Consumer>
-        {({folders, notes}) => (
+        {({folders}) => (
         <section className="folder-list">
         {folders.map(folder=> 
             <div className='folder' key={folder.id}>
