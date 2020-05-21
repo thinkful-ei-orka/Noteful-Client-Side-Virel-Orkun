@@ -5,7 +5,8 @@ import { Route } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import GoBack from "./Sidebar/GoBack";
 import UserContext from "./ContextProvider";
-import NoteList from './Main/NoteList'
+import NoteList from './Main/NoteList';
+import Note from './Main/Note';
 
 class App extends React.Component {
   
@@ -79,14 +80,15 @@ class App extends React.Component {
           </div>
           
           <div className="main-router">
-        <Route path="/" exact component={Main} />
+        <Route path="/" exact component={NoteList} />
 
         <Route
           path="/folder/:folderId"
           render={(routerProps) => {
             console.log(routerProps.match.params.folderId);
             return (
-              <Main
+              <NoteList
+                showDescription={false}
                 folderId={routerProps.match.params.folderId}
               />
             );
@@ -95,7 +97,7 @@ class App extends React.Component {
         <Route
          path="/note/:noteId"
          render={(routerProps) => (
-           <NoteList
+           <Note
                  showDescription={true}
                  note={this.state.notes.filter(
                      (note) => note.id === routerProps.match.params.noteId

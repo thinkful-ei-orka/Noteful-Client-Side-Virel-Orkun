@@ -10,9 +10,9 @@ export default function MainRoute(props) {
     return(
         
         <section className="main">
-            <NoteList showDescription={props.showDescription}
-            folderId={props.folderId}
-            />    
+            {/* <NoteList showDescription={props.showDescription}
+            folderId={props.folderId} */}
+              
         </section> 
       
     )
