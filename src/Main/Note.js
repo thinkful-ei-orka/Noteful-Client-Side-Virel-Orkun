@@ -44,5 +44,5 @@ export default function Note(props) {
 Note.propTypes = {
     note: PropTypes.array,
     location: PropTypes.object,
-    showDescription : PropTypes.boolean
+    showDescription : PropTypes.bool
   };

@@ -118,6 +118,8 @@ class App extends React.Component {
       .catch((err) => console.log(err.message));
   };
 
+
+
   componentDidMount() {
     this.fetchAPI("notes").then((res) => {
       this.setState({
@@ -131,6 +133,8 @@ class App extends React.Component {
       });
     });
   }
+
+  
 
   render() {
     console.log(this.state);

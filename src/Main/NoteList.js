@@ -45,5 +45,5 @@ export default function NoteList(props) {
 NoteList.propTypes = {
     folderId: PropTypes.string,
     location: PropTypes.object,
-    showDescription : PropTypes.boolean
+    showDescription : PropTypes.bool
   };
