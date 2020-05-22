@@ -11,7 +11,7 @@ export default class AddFolder extends React.Component {
   };
 
   newName = (submittedName) => {
-    this.setState({name : {value: submittedName, touched: true}})
+    this.setState({ name: { value: submittedName, touched: true } })
   }
 
   checkName() {
@@ -27,27 +27,27 @@ export default class AddFolder extends React.Component {
   render() {
     return (
       <UserContext.Consumer>
-        {({handleNewFolderSubmit}) => (
-      <div className="add-folder-form">
-        <h2>Add a New Folder</h2>
-        <form onSubmit={(e) =>  handleNewFolderSubmit(e, this.state.name.value, this.props.history)  }> 
-          <label htmlFor="add-new-folder">Your Folder Name:
-              {this.state.name.touched && 
-              <p className="error">{this.checkName()}</p>
-              } 
-               
-          </label>
-          <input onChange={e => this.newName(e.target.value)} id="add-new-folder" type="text" placeholder="folder" required></input>
-              
-          <button disabled={this.checkName()} type="submit">Submit</button>
-        </form>
+        {({ handleNewFolderSubmit }) => (
+          <div className="add-folder-form">
+            <h2>Add a New Folder</h2>
+            <form onSubmit={(e) => handleNewFolderSubmit(e, this.state.name.value, this.props.history)}>
+              <label htmlFor="add-new-folder">Your Folder Name:
+              {this.state.name.touched &&
+                  <p className="error">{this.checkName()}</p>
+                }
+
+              </label>
+              <input onChange={e => this.newName(e.target.value)} id="add-new-folder" type="text" placeholder="folder" required></input>
+
+              <button disabled={this.checkName()} type="submit">Submit</button>
+            </form>
           </div>
-          )} 
-        </UserContext.Consumer>
+        )}
+      </UserContext.Consumer>
     );
   }
 }
 
 AddFolder.propTypes = {
-  value: PropTypes.object
+  value: PropTypes.object.isRequired
 };

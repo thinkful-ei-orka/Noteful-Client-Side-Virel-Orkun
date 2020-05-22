@@ -134,7 +134,7 @@ class App extends React.Component {
     });
   }
 
-  
+
 
   render() {
     console.log(this.state);
@@ -225,7 +225,7 @@ class App extends React.Component {
                   />
                 )}
               />
-              
+
             </div>
           </main>
         </ErrorPage>
