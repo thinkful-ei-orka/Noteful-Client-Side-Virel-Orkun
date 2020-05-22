@@ -17,5 +17,5 @@ export default function GoBack(props) {
 }
 
 GoBack.propTypes = {
-    folderName: PropTypes.string
-  };
+    folderName: PropTypes.string.isRequired
+};
