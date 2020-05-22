@@ -1,5 +1,6 @@
 import React from 'react';
 import UserContext from '../ContextProvider';
+import PropTypes from 'prop-types';
 
 export default class AddNote extends React.Component {
 
@@ -88,3 +89,7 @@ export default class AddNote extends React.Component {
         )
     }
 }
+
+AddNote.propTypes = {
+    value: PropTypes.object
+  };

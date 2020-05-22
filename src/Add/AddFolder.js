@@ -1,5 +1,6 @@
 import React from "react";
 import UserContext from '../ContextProvider';
+import PropTypes from 'prop-types';
 
 export default class AddFolder extends React.Component {
   state = {
@@ -46,3 +47,7 @@ export default class AddFolder extends React.Component {
     );
   }
 }
+
+AddFolder.propTypes = {
+  value: PropTypes.object
+};

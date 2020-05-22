@@ -1,12 +1,9 @@
 import React from "react";
 import FolderList from "./FolderList";
-import UserContext from '../ContextProvider';
 import { NavLink } from "react-router-dom";
 
-export default function Sidebar(props) {
+export default function Sidebar() {
   return (
-    <UserContext.Consumer>
-      {({ AddFolder }) => (
         <section className="sidebar">
           <FolderList />
        <NavLink to="/add-folder">
@@ -15,8 +12,7 @@ export default function Sidebar(props) {
       </button>
       </NavLink> 
         </section>
-      )}
-    </UserContext.Consumer>
+      
   );
 }
 

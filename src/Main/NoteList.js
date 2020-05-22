@@ -2,9 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import UserContext from '../ContextProvider';
+import PropTypes from 'prop-types';
 
 
-export default function Note(props) {
+export default function NoteList(props) {
     console.log(props)
     return(
         <UserContext.Consumer>
@@ -40,3 +41,9 @@ export default function Note(props) {
         </UserContext.Consumer>
     )
 }
+
+NoteList.propTypes = {
+    folderId: PropTypes.string,
+    location: PropTypes.object,
+    showDescription : PropTypes.boolean
+  };

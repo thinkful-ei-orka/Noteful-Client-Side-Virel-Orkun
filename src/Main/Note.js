@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import UserContext from '../ContextProvider';
 import './Note.css';
+import PropTypes from 'prop-types';
 
 
 export default function Note(props) {
@@ -39,3 +40,9 @@ export default function Note(props) {
          </UserContext.Consumer>
     )
 }
+
+Note.propTypes = {
+    note: PropTypes.array,
+    location: PropTypes.object,
+    showDescription : PropTypes.boolean
+  };

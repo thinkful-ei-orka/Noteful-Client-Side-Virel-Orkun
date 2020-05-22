@@ -15,8 +15,8 @@ export default class ErrorPage extends React.Component {
         if (this.state.error) {
             return (
                     <div>
-                    <h1>Something seems to have gone wrong</h1>
-                    <p>Try refreshing the page</p>
+                        <h1>Something seems to have gone wrong</h1>
+                        <p>Try refreshing the page</p>
                     </div>
             );
         }

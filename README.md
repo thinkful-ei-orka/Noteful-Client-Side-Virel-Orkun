@@ -1,3 +1,14 @@
+Who worked on this project from the start: 
+Tuesday : Orkun Ozekin - Jon Oliver,
+Wednesday: Orkun Ozekin - Jon Clark,
+Thursday: Magdalena Painter - Orkun Ozekin
+
+Magdalena Painter's Pairings:
+Tuesday: Michael Blalock,
+Wednesday: Mandela Jones,
+Thursday: Orkun Ozekin
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

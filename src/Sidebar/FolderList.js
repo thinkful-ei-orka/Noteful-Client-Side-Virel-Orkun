@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import UserContext from '../ContextProvider';
 
-export default function FolderList(props) {
+export default function FolderList() {
     //We need only the notes that match the selected folder. Use filter.
 
     return(
