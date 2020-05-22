@@ -42,7 +42,7 @@ export default function Note(props) {
 }
 
 Note.propTypes = {
-    note: PropTypes.array,
-    location: PropTypes.object,
-    showDescription : PropTypes.bool
+    note: PropTypes.array.isRequired,
+    location: PropTypes.object.isRequired
+    showDescription : PropTypes.bool.isRequired
   };
