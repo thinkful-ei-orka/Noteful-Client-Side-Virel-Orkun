@@ -11,16 +11,18 @@ export default function NoteList(props) {
         <UserContext.Consumer>
             {({ notes, deleteNote }) => (
                 <section>
+                    {console.log(notes)}
                     {notes.filter(
                         (note) => {
                             if (props.folderId === undefined) {
                                 return true
                             }
-                            return note.folderId === props.folderId
+                            console.log(typeof props.folderId)
+                            return note.folderid === props.folderId
 
                         }).map(note =>
                             <div className='noteItem' key={note.id} >
-                                <NavLink className='navlink note-name' to={'/note/' + note.id}>{note.name}</NavLink>
+                                <NavLink className='navlink note-name' to={'/note/' + note.id}>{note.title}</NavLink>
                                 <p className='date'>{`Date modified on ${moment(note.modified).format('MMM D YYYY')}`}</p>
                                 <button
                                     onClick={() => {
@@ -43,7 +45,6 @@ export default function NoteList(props) {
 }
 
 NoteList.propTypes = {
-    folderId: PropTypes.string,
     location: PropTypes.object.isRequired,
     showDescription: PropTypes.bool
 };

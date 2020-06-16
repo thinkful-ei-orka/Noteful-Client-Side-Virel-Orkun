@@ -52,7 +52,7 @@ class App extends React.Component {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: folderName }),
+      body: JSON.stringify({ title: folderName }),
     })
       .then((res) => {
         if (res.ok) {
@@ -64,7 +64,7 @@ class App extends React.Component {
       .then((response) => {
         const newFolder = [
           ...this.state.folders,
-          { id: response.id, name: folderName },
+          { id: response.id, title: folderName },
         ];
         this.setState({ folders: newFolder });
         history.push("/");
@@ -88,8 +88,8 @@ class App extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: noteName,
-        folderId: noteFolderId,
+        title: noteName,
+        folderid: noteFolderId,
         content: noteContent,
         modified: modified,
       }),
@@ -106,9 +106,9 @@ class App extends React.Component {
           ...this.state.notes,
           {
             id: response.id,
-            name: noteName,
+            title: noteName,
             modified: modified,
-            folderId: noteFolderId,
+            folderid: noteFolderId,
             content: noteContent,
           },
         ];
@@ -118,7 +118,7 @@ class App extends React.Component {
       .catch((err) => console.log(err.message));
   };
 
-
+  
 
   componentDidMount() {
     this.fetchAPI("notes").then((res) => {
@@ -138,9 +138,9 @@ class App extends React.Component {
 
   render() {
     console.log(this.state);
-    if (this.state.notes.length === 0 || this.state.folders.length === 0) {
-      return <p>Loading...</p>;
-    }
+    // if (this.state.notes.length === 0 || this.state.folders.length === 0) {
+    //   return <p>Loading...</p>;
+    // }
     return (
       <UserContext.Provider
         value={{
@@ -165,13 +165,15 @@ class App extends React.Component {
                 path="/note/:noteId"
                 render={(routerProps) => {
                   console.log(routerProps);
-                  let note = this.state.notes.find(
-                    (note) => note.id === routerProps.match.params.noteId
+                  let note = this.state.notes.filter(
+                    (note) => note.id === parseInt(routerProps.match.params.noteId)
+                    );
+                  console.log(note)
+                  let folder = this.state.folders.filter(
+                    (folder) => folder.id === note.folderid
                   );
-                  let folder = this.state.folders.find(
-                    (folder) => folder.id === note.folderId
-                  );
-                  return <GoBack folderName={folder.name} />;
+                  console.log(folder)
+                  return <GoBack folderName={folder.title} />;
                 }}
               />
             </div>
@@ -187,7 +189,7 @@ class App extends React.Component {
                     <NoteList
                       location={routerProps.location}
                       showDescription={false}
-                      folderId={routerProps.match.params.folderId}
+                      folderId={parseInt(routerProps.match.params.folderId)}
                     />
                   );
                 }}
@@ -199,8 +201,11 @@ class App extends React.Component {
                     location={routerProps.location}
                     showDescription={true}
                     note={this.state.notes.filter(
-                      (note) => note.id === routerProps.match.params.noteId
-                    )}
+                      (note) => { 
+                        console.log(routerProps.match.params.noteId)
+                        console.log(typeof note.id)
+                        return note.id === parseInt(routerProps.match.params.noteId)
+                      })}
                   />
                 )}
               />

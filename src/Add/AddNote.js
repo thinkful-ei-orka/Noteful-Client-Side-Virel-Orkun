@@ -1,11 +1,11 @@
 import React from 'react';
 import UserContext from '../ContextProvider';
-import PropTypes from 'prop-types';
+
 
 export default class AddNote extends React.Component {
 
     state = {
-        name: {
+        title: {
             value: '',
             touched: false
         },
@@ -21,7 +21,7 @@ export default class AddNote extends React.Component {
     };
 
     newName = (submittedName) => {
-        this.setState({ name: { value: submittedName, touched: true } })
+        this.setState({ title: { value: submittedName, touched: true } })
     }
 
     newContent = (content) => {
@@ -33,9 +33,9 @@ export default class AddNote extends React.Component {
     }
 
     checkName() {
-        const name = this.state.name.value;
-        if (name.length <= 3) {
-            return 'Name should contain at least 4 letters'
+        const title = this.state.title.value;
+        if (title.length <= 3) {
+            return 'Title should contain at least 4 letters'
         }
     }
 
@@ -60,9 +60,9 @@ export default class AddNote extends React.Component {
                 {({ handleNewNoteSubmit, folders }) => (
                     <section className="add-new-note">
                         <h2>Add a New Note</h2>
-                        <form onSubmit={(e) => handleNewNoteSubmit(e, this.state.name.value, this.state.folderName.value, this.state.content.value, this.props.history)}>
-                            <label htmlFor="addNote">Note Name:
-                    {this.state.name.touched &&
+                        <form onSubmit={(e) => handleNewNoteSubmit(e, this.state.title.value, this.state.folderName.value, this.state.content.value, this.props.history)}>
+                            <label htmlFor="addNote">Note Title:
+                    {this.state.title.touched &&
                                     <p className="error">{this.checkName()}</p>
                                 }
                             </label>
@@ -76,7 +76,7 @@ export default class AddNote extends React.Component {
                             <textarea onChange={e => this.newContent(e.target.value)} id="description"></textarea>
                             <select className="select-folder" onChange={e => this.newNoteFolder(e.target.value)}>
                                 <option>Select a folder</option>
-                                {folders.map(folder => <option key={folder.id} value={folder.id}>{folder.name}</option>)}
+                                {folders.map(folder => <option key={folder.id} value={folder.id}>{folder.title}</option>)}
                             </select>
                             <p className="error">{this.checkFolder()}</p>
                             <button disabled={this.checkName() || this.checkContent() || this.checkFolder()} type="submit">Add Note</button>
@@ -90,6 +90,3 @@ export default class AddNote extends React.Component {
     }
 }
 
-AddNote.propTypes = {
-    value: PropTypes.object.isRequired
-};

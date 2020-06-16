@@ -1,25 +1,25 @@
 import React from "react";
 import UserContext from '../ContextProvider';
-import PropTypes from 'prop-types';
+
 
 export default class AddFolder extends React.Component {
   state = {
-    name: {
+    title: {
       value: '',
       touched: false
     }
   };
 
-  newName = (submittedName) => {
-    this.setState({ name: { value: submittedName, touched: true } })
+  newTitle = (submittedName) => {
+    this.setState({ title: { value: submittedName, touched: true } })
   }
 
   checkName() {
-    const name = this.state.name.value;
-    if (name.length > 15) {
+    const title = this.state.title.value;
+    if (title.length > 15) {
       return `Folder name cannot contain more than 15 characters`
     }
-    else if (name.length < 1) {
+    else if (title.length < 1) {
       return 'Please enter text';
     }
   }
@@ -30,14 +30,14 @@ export default class AddFolder extends React.Component {
         {({ handleNewFolderSubmit }) => (
           <div className="add-folder-form">
             <h2>Add a New Folder</h2>
-            <form onSubmit={(e) => handleNewFolderSubmit(e, this.state.name.value, this.props.history)}>
+            <form onSubmit={(e) => handleNewFolderSubmit(e, this.state.title.value, this.props.history)}>
               <label htmlFor="add-new-folder">Your Folder Name:
-              {this.state.name.touched &&
+              {this.state.title.touched &&
                   <p className="error">{this.checkName()}</p>
                 }
 
               </label>
-              <input onChange={e => this.newName(e.target.value)} id="add-new-folder" type="text" placeholder="folder" required></input>
+              <input onChange={e => this.newTitle(e.target.value)} id="add-new-folder" type="text" placeholder="folder" required></input>
 
               <button disabled={this.checkName()} type="submit">Submit</button>
             </form>
@@ -48,6 +48,3 @@ export default class AddFolder extends React.Component {
   }
 }
 
-AddFolder.propTypes = {
-  value: PropTypes.object.isRequired
-};

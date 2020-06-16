@@ -11,7 +11,7 @@ export default function FolderList() {
         <section className="folder-list">
         {folders.map(folder=> 
             <div className='folder' key={folder.id}>
-                <NavLink className='navlink' to={'/folder/' + folder.id} >{folder.name}</NavLink>
+                <NavLink className='navlink' to={'/folder/' + folder.id} >{folder.title}</NavLink>
             </div>
             )}  
         </section>
