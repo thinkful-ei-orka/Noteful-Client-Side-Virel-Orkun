@@ -17,7 +17,7 @@ class App extends React.Component {
   };
 
   fetchAPI = (endpoint) => {
-    return fetch(`http://localhost:9090/${endpoint}`)
+    return fetch(`http://localhost:8080/${endpoint}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -29,7 +29,7 @@ class App extends React.Component {
   };
 
   deleteNote = (noteId) => {
-    return fetch(`http://localhost:9090/${noteId}`, {
+    return fetch(`http://localhost:8080/notes/${noteId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -46,7 +46,7 @@ class App extends React.Component {
 
   handleNewFolderSubmit = (event, folderName, history) => {
     event.preventDefault();
-    fetch(`http://localhost:9090/folders`, {
+    fetch(`http://localhost:8080/folders`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -81,7 +81,7 @@ class App extends React.Component {
   ) => {
     event.preventDefault();
     const modified = Date.now();
-    fetch(`http://localhost:9090/notes`, {
+    fetch(`http://localhost:8080/notes`, {
       method: "POST",
       headers: {
         Accept: "application/json",
