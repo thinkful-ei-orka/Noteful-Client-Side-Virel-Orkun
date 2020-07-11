@@ -108,7 +108,7 @@ class App extends React.Component {
             id: response.id,
             title: noteName,
             modified: modified,
-            folderid: noteFolderId,
+            folderid: +noteFolderId,
             content: noteContent,
           },
         ];
